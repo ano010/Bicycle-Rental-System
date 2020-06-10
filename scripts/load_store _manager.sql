@@ -1,6 +1,6 @@
 USE brs;
 
-INSERT INTO store_manager(user_nic, from_date, to_date) VALUES
+INSERT INTO store_manager(nic, from_date, to_date) VALUES
 ('941112293V', '2000-01-01', '9999-01-01'),
 ('941412293V', '2000-01-01', '9999-01-01'),
 ('941312293V', '2000-01-01', '9999-01-01'),

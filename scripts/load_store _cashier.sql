@@ -1,6 +1,6 @@
 USE brs;
 
-INSERT INTO store_cashier(user_nic, from_date, to_date, store_id) VALUES
+INSERT INTO store_cashier(nic, from_date, to_date, store_id) VALUES
 ('943112293V', '2000-01-01', '9999-01-01', 1),
 ('944112293V', '2000-01-01', '9999-01-01', 2),
 ('945112293V', '2000-01-01', '9999-01-01', 3),
