@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `brs`.`store_manager` (
     FOREIGN KEY (`nic`)
     REFERENCES `brs`.`user` (`nic`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `brs`.`store` (
     FOREIGN KEY (`manager`)
     REFERENCES `brs`.`store_manager` (`nic`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -80,12 +80,12 @@ CREATE TABLE IF NOT EXISTS `brs`.`store_cashier` (
     FOREIGN KEY (`nic`)
     REFERENCES `brs`.`user` (`nic`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_store_cashier_store1`
     FOREIGN KEY (`store_id`)
     REFERENCES `brs`.`store` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `brs`.`customer` (
     FOREIGN KEY (`nic`)
     REFERENCES `brs`.`user` (`nic`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -120,7 +120,7 @@ CREATE TABLE IF NOT EXISTS `brs`.`bicycle` (
     FOREIGN KEY (`store_id`)
     REFERENCES `brs`.`store` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -160,32 +160,32 @@ CREATE TABLE IF NOT EXISTS `brs`.`rental` (
     FOREIGN KEY (`rent_from`)
     REFERENCES `brs`.`store` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_rental_store2`
     FOREIGN KEY (`return_to`)
     REFERENCES `brs`.`store` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_rental_bicycle1`
     FOREIGN KEY (`bicycle_id`)
     REFERENCES `brs`.`bicycle` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_rental_payment_status1`
     FOREIGN KEY (`payment_status_id`)
     REFERENCES `brs`.`payment_status` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_rental_customer1`
     FOREIGN KEY (`customer_nic`)
     REFERENCES `brs`.`customer` (`nic`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_rental_store_cashier1`
     FOREIGN KEY (`store_cashier_nic`)
     REFERENCES `brs`.`store_cashier` (`nic`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -204,7 +204,7 @@ CREATE TABLE IF NOT EXISTS `brs`.`address` (
     FOREIGN KEY (`user_nic`)
     REFERENCES `brs`.`user` (`nic`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
