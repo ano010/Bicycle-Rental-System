@@ -83,6 +83,7 @@ END$$
 DELIMITER ;
 
 # update daily rental for a rental
+# transaction handled: concurrency control: many can update at the same time
 DELIMITER $$
 CREATE PROCEDURE update_daily_rental_rate(
     id INT,
@@ -94,9 +95,11 @@ BEGIN
             SET MESSAGE_TEXT = 'Invalid daily rental rate';
     END IF;
 
+    START TRANSACTION ;
     UPDATE rental r
     SET r.dailyRentalDate = dailyRentalRate
     WHERE r.id = id;
+    COMMIT ;
 END$$
 DELIMITER ;
 
@@ -250,6 +253,7 @@ END $$
 DELIMITER ;
 
 # insert rental
+# Transaction handled
 DELIMITER $$
 CREATE PROCEDURE insert_rental(
     rental_date DATE,
@@ -260,24 +264,30 @@ CREATE PROCEDURE insert_rental(
     sc_nic VARCHAR(10)
 )
 BEGIN
+    START TRANSACTION ;
     INSERT INTO rental (rentalDate, rent_from, bicycle_id, customer_nic, payment_status_id,store_cashier_nic)
     VALUES (rental_date, s_from, b_id, c_nic, ps_id, sc_nic);
+    COMMIT ;
 END $$
 DELIMITER ;
 
 # insert customer
+# transaction handled
 DELIMITER $$
 CREATE PROCEDURE insert_customer(
     customer_nic VARCHAR(10),
     registration_date DATE
 )
 BEGIN
+    START TRANSACTION ;
     INSERT INTO customer
     VALUES (customer_nic, registration_date, NULL);
+    COMMIT ;
 END $$
 DELIMITER ;
 
 # update rental
+# transaction handled
 DELIMITER $$
 CREATE PROCEDURE update_rental(
     r_id INT,
@@ -288,6 +298,7 @@ CREATE PROCEDURE update_rental(
     sc_nic VARCHAR(10)
 )
 BEGIN
+    START TRANSACTION ;
     UPDATE rental
     SET
         returnDate = return_date,
@@ -296,33 +307,40 @@ BEGIN
         payment_status_id = ps_id,
         store_cashier_nic = sc_nic
     WHERE rental.id = r_id;
+    COMMIT ;
 
 END $$
 DELIMITER ;
 
 # delete a rental
+# transaction handled
 DELIMITER $$
 CREATE PROCEDURE delete_rental(
     r_id INT
 )
 BEGIN
+    START TRANSACTION ;
     DELETE FROM rental
     WHERE rental.id = r_id;
+    COMMIT ;
 END $$
 DELIMITER ;
 
 # update number of bicycle in store
+# transaction handled
 DELIMITER $$
 CREATE PROCEDURE update_store_bicycle_count(
     s_id INT
 )
 BEGIN
+    START TRANSACTION ;
     UPDATE store
      SET number_of_bicycles = (
         SELECT COUNT(*) FROM bicycle
             WHERE store_id = s_id AND status = 'IN'
         )
     WHERE id = s_id;
+    COMMIT ;
 END $$
 DELIMITER ;
 

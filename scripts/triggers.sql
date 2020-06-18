@@ -4,6 +4,7 @@ DROP TRIGGER IF EXISTS store_after_insert;
 DROP TRIGGER IF EXISTS store_after_delete;
 
 # updating number of bicycle in a store after a new bicycle added
+# transaction handled
 DELIMITER $$
 CREATE TRIGGER store_after_insert
     AFTER INSERT ON bicycle
