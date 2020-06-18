@@ -1,0 +1,11 @@
+CREATE USER IF NOT EXISTS 'manager'@'localhost' IDENTIFIED BY '1234';
+CREATE USER IF NOT EXISTS 'cashier'@'localhost' IDENTIFIED BY '1234';
+CREATE USER IF NOT EXISTS 'customer'@'localhost' IDENTIFIED BY '1234';
+GRANT SELECT ON `brs`.`bicycle` TO 'cashier'@'localhost';
+GRANT SELECT, INSERT, DELETE, UPDATE ON `brs`.`bicycle` TO 'manager'@'localhost';
+GRANT SELECT ON `brs`.`user` TO 'customer'@'localhost';
+GRANT SELECT ON `brs`.`bicycle` TO 'customer'@'localhost';
+GRANT SELECT ON `brs`.`address` TO 'customer'@'localhost';
+GRANT SELECT ON `brs`.`rental` TO 'customer'@'localhost';
+GRANT SELECT ON `brs`.`payment_status` TO 'customer'@'localhost';
+GRANT SELECT ON `brs`.`store` TO 'customer'@'localhost';
